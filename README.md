@@ -1,8 +1,9 @@
 # Vitrine de material didático
 
-Página estática única que consolida os artefatos de aula autorais da disciplina de Tecnologias
-Emergentes em Engenharia de Software (ESOFT8, UniCesumar), para servir de link único em currículo e
-perfil profissional, no lugar de vários repositórios soltos.
+Página estática única que consolida os artefatos de aula autorais das disciplinas de Engenharia de
+Software (UniCesumar), para servir de link único em currículo e perfil profissional, no lugar de
+vários repositórios soltos. Regra da página: só entra artefato usado em aula, com página no ar ou
+código público, e todo link é verificado (página responde 200, repositório e imagem públicos).
 
 ## Conteúdo
 
@@ -14,53 +15,19 @@ Não há build. Abrir o arquivo no navegador já mostra o resultado final.
 
 ## Artefatos apresentados
 
-| Artefato | Repositório |
-|---|---|
-| Runtime de tool calling no navegador | `pedrosatin/runtime-tool-calling` |
-| Laboratório de segurança de agentes | `pedrosatin/laboratorio-seguranca-agentes` |
-| Servidores MCP da disciplina | `pedrosatin/mcp-servidores-aula` (imagens `psatin/*` no Docker Hub) |
-| Servidor MCP de revisão da B1 | `pedrosatin/mcp-revisao-b1` |
-| Acervo de slides por turma | `TI-UNICESUMAR/2026-tecnologias-emergentes-esoft8s-a` e `-b` |
+| Artefato | Página no ar | Código/imagem pública |
+|---|---|---|
+| Runtime de tool calling no navegador | `pedrosatin.github.io/runtime-tool-calling` | `pedrosatin/runtime-tool-calling` |
+| Laboratório de prompt injection | `pedrosatin.github.io/laboratorio-prompt-injection` | `pedrosatin/laboratorio-prompt-injection` |
+| Servidores MCP da disciplina | — (imagens Docker) | `psatin/mcp-pokeapi`, `psatin/mcp-diario-violao` no Docker Hub |
+| Prova de Programação Web em 2024 | `pedrosatin.github.io/prova-ibge-noticias` | `pedrosatin/prova-ibge-noticias` |
+| Programação Web e React em 2024 | — (só código) | `pedrosatin/proffy-web`, `calc-react`, `tasks-react`, `minefield-react`, `calc-angular` (arquivados) |
 
 ## Como publicar
 
-Esta pasta ainda não é um repositório Git. Qualquer um dos dois caminhos abaixo serve.
-
-### GitHub Pages
-
-1. Criar um repositório público, por exemplo `pedrosatin/vitrine`.
-2. Na pasta desta vitrine:
-
-   ```
-   git init
-   git add index.html README.md
-   git commit -m "Vitrine de material didatico"
-   git branch -M main
-   git remote add origin https://github.com/pedrosatin/vitrine.git
-   git push -u origin main
-   ```
-
-3. No repositório, em `Settings > Pages`, escolher `Deploy from a branch`, branch `main`, pasta
-   `/ (root)`.
-4. O endereço sai como `https://pedrosatin.github.io/vitrine/`.
-
-Para servir na raiz do domínio de usuário (`https://pedrosatin.github.io/`), o repositório precisa
-se chamar `pedrosatin.github.io`.
-
-### Cloudflare Pages
-
-1. Fazer o push para um repositório Git, como acima.
-2. No painel da Cloudflare: `Workers & Pages > Create > Pages > Connect to Git`, escolher o
-   repositório.
-3. Build command vazio e output directory `/` — é um site estático sem build.
-4. O endereço sai como `https://<projeto>.pages.dev`, e um domínio próprio pode ser ligado em
-   `Custom domains`.
-
-Alternativa sem Git, pelo Wrangler, a partir desta pasta:
-
-```
-npx wrangler pages deploy . --project-name vitrine
-```
+Repositório privado `pedrosatin/vitrine-material-didatico`, com GitHub Pages público a partir da
+branch `main`, pasta `/ (root)`. O endereço é `https://pedrosatin.github.io/vitrine-material-didatico/`.
+Basta commitar e dar push: o deploy é automático.
 
 ## Manutenção
 
