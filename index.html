@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Material didático — Pedro Satin</title>
-<meta name="description" content="Artefatos de aula autorais de Pedro Satin (UniCesumar): runtime de tool calling, laboratório de prompt injection, servidores MCP, prova de Programação Web e exemplos de React.">
+<title>Material didático de Pedro Satin</title>
+<meta name="description" content="Artefatos de aula autorais de Pedro Satin (UniCesumar): runtime de tool calling, laboratório de prompt injection, extrator de diff de pull request, servidores MCP e a prova de Programação Web de 2024.">
 <style>
   :root {
     --bg: #fbfbfa;
@@ -95,10 +95,10 @@
 <body>
 <header>
   <div class="wrap">
-    <h1>Material didático — Pedro Satin</h1>
-    <p class="role">Professor de Tecnologias Emergentes em Engenharia de Software — Engenharia de Software, 8º semestre, UniCesumar</p>
-    <p class="intro">Esta página reúne os artefatos de código que escrevi para a disciplina e para as aulas de programação. São materiais de aula executáveis: o aluno roda, quebra e observa o comportamento, em vez de apenas ler o slide.</p>
-    <p class="intro">Cada item abaixo descreve o que é o artefato, qual problema de ensino ele resolve, a stack e onde está o código. Todos os links desta página foram verificados: páginas no ar respondem 200 e repositórios e imagens são públicos.</p>
+    <h1>Material didático de Pedro Satin</h1>
+    <p class="role">Professor de Tecnologias Emergentes em Engenharia de Software, Engenharia de Software, 8º semestre, UniCesumar</p>
+    <p class="intro">Esta página reúne os artefatos de código que escrevi para a disciplina e para as aulas de programação. Todos foram usados em sala. São materiais executáveis: o aluno roda, quebra e observa o comportamento.</p>
+    <p class="intro">Cada item descreve o artefato, o problema de ensino que ele resolve, a stack e onde está o código. Todos os links desta página foram verificados. As páginas no ar respondem 200 e os repositórios e as imagens Docker são públicos.</p>
   </div>
 </header>
 
@@ -109,16 +109,16 @@
     <h2>Fechar o ciclo que os playgrounds deixam pela metade</h2>
 
     <h3>Problema pedagógico</h3>
-    <p>No Google AI Studio e no playground do Groq o aluno declara a ferramenta, o modelo emite a chamada e o exercício para ali: não existe onde escrever o corpo da função. O aluno vê o <code>tool_use</code>, nunca a execução nem o <code>tool_result</code> voltando ao modelo. O conceito fica pela metade.</p>
+    <p>No Google AI Studio e no playground do Groq o aluno declara a ferramenta, o modelo emite a chamada e o exercício para ali. Não existe onde escrever o corpo da função. O aluno vê o <code>tool_use</code> e nunca vê a execução nem o <code>tool_result</code> voltando ao modelo.</p>
 
     <h3>O que é</h3>
-    <p>Uma página estática única que executa o ciclo inteiro dentro do navegador. O aluno escreve a declaração da ferramenta e o corpo da função em JavaScript; a própria página executa esse corpo com os argumentos que o modelo escolheu, devolve o retorno ao modelo e mostra a resposta final. Os passos aparecem em duas raias: o que roda na máquina do aluno e as decisões do modelo.</p>
+    <p>Uma página estática única que executa o ciclo inteiro dentro do navegador. O aluno escreve a declaração da ferramenta e o corpo da função em JavaScript. A própria página executa esse corpo com os argumentos que o modelo escolheu, devolve o retorno ao modelo e mostra a resposta final. Os passos aparecem em duas raias, uma para o que roda na máquina do aluno e outra para as decisões do modelo.</p>
     <ul>
-      <li>Dois provedores: Google AI Studio (padrão) e Groq, com troca de modelo na própria página e um botão que consulta o endpoint de modelos da conta.</li>
+      <li>Dois provedores, Google AI Studio (padrão) e Groq, com troca de modelo na própria página e um botão que consulta o endpoint de modelos da conta.</li>
       <li>Quatro cenários pré-carregados: ciclo completo, declaração opaca, falta de argumento obrigatório e pedido fora do escopo da ferramenta.</li>
-      <li>Ao fim de um ciclo concluído, a página gera um código de verificação de 8 caracteres via SHA-256 sobre a declaração, o corpo da função, o pedido e todos os passos executados. Entregas idênticas produzem o mesmo código, o que torna a cópia detectável na correção.</li>
-      <li>Exportação do relatório da execução por cópia para a área de transferência ou download em Markdown.</li>
-      <li>Realce de sintaxe escrito à mão, sem biblioteca: um <code>pre</code> colorido atrás de um <code>textarea</code> transparente, com a mesma métrica de fonte.</li>
+      <li>Ao fim de um ciclo concluído, a página gera um código de verificação de 8 caracteres por SHA-256 sobre a declaração, o corpo da função, o pedido e todos os passos executados. Entregas idênticas produzem o mesmo código, o que torna a cópia detectável na correção.</li>
+      <li>O relatório da execução sai por cópia para a área de transferência ou download em Markdown.</li>
+      <li>Realce de sintaxe escrito à mão, sem biblioteca. Um <code>pre</code> colorido fica atrás de um <code>textarea</code> transparente, com a mesma métrica de fonte.</li>
       <li>A chave de API fica no <code>localStorage</code> e vai apenas para o provedor escolhido. Não há servidor intermediário.</li>
     </ul>
 
@@ -169,16 +169,44 @@
   </section>
 
   <section class="card">
+    <p class="kicker">Extrator de diff de pull request</p>
+    <h2>A mesma pull request revisada com três instruções diferentes</h2>
+
+    <h3>Problema pedagógico</h3>
+    <p>O aluno precisa ver o que muda na revisão quando a instrução dada ao modelo muda, sobre o mesmo diff. Com o código à vista e a instrução variando, a diferença entre um pedido genérico e um roteiro de revisão com eixos declarados aparece no texto que o modelo devolve.</p>
+
+    <h3>O que é</h3>
+    <p>Uma página estática que busca o diff de uma pull request pública do GitHub e o prepara para revisão por um modelo. A extração usa o endpoint <code>/repos/{owner}/{repo}/pulls/{number}</code> com o cabeçalho <code>Accept: application/vnd.github.v3.diff</code>, que responde com CORS liberado. A página conta arquivos alterados, linhas adicionadas e linhas removidas, e mostra o diff colorido por adição, remoção, cabeçalho de arquivo e bloco <code>@@</code>.</p>
+    <ul>
+      <li>Quatro saídas prontas para colar no modelo: pedido de revisão genérico, roteiro autoral com cinco eixos (corretude, paradigma funcional, segurança, performance e manutenibilidade), roteiro formal com resumo, tabela de impacto por arquivo e veredito, e o diff puro com os metadados.</li>
+      <li>Token pessoal do GitHub opcional, para escapar do limite de requisições anônimas e alcançar repositório privado.</li>
+      <li>Tudo roda no navegador. Não há backend e nem o token nem o diff ficam armazenados.</li>
+    </ul>
+
+    <h3>Stack</h3>
+    <ul class="stack">
+      <li>HTML, CSS e JavaScript sem framework</li>
+      <li>API REST do GitHub</li>
+      <li>GitHub Actions e GitHub Pages</li>
+    </ul>
+
+    <ul class="links">
+      <li><span>Página</span> <a href="https://pedrosatin.github.io/pr-diff-extractor/">pedrosatin.github.io/pr-diff-extractor</a></li>
+      <li><span>Repositório</span> <a href="https://github.com/pedrosatin/pr-diff-extractor">github.com/pedrosatin/pr-diff-extractor</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
     <p class="kicker">Servidores MCP da disciplina</p>
     <h2>Dois servidores em TypeScript, publicados como imagens Docker</h2>
 
     <h3>Problema pedagógico</h3>
-    <p>O aluno precisa ver a diferença entre um servidor somente leitura e um servidor que grava em disco e roda em container. Em vez de um exemplo genérico, cada servidor resolve um problema concreto e os dois formam uma progressão: leitura primeiro, escrita depois.</p>
+    <p>O aluno precisa ver a diferença entre um servidor somente leitura e um servidor que grava em disco e roda em container. Cada servidor resolve um problema concreto e os dois formam uma progressão, leitura primeiro e escrita depois.</p>
 
     <h3>O que é</h3>
     <ul>
-      <li><strong><code>psatin/mcp-pokeapi</code></strong> — duas tools somente leitura sobre a PokeAPI. Serve de exemplo digitado ao vivo: a pasta <code>passos/</code> tem quatro versões do mesmo arquivo, do servidor vazio até a chamada real, e a aula pode parar em qualquer passo. Usa a comparação entre uma tool <code>fetch</code> genérica, que devolve o JSON inteiro para o modelo processar, e uma tool específica, que devolve campos já convertidos.</li>
-      <li><strong><code>psatin/mcp-diario-violao</code></strong> — diário de prática de violão com seis tools, algumas com escrita em disco. A escrita traz para a aula três assuntos que o servidor somente leitura não alcança: aprovação de escrita no cliente, idempotência e persistência quando o processo roda em container efêmero.</li>
+      <li><code>psatin/mcp-pokeapi</code> tem duas tools somente leitura sobre a PokeAPI. Serve de exemplo digitado ao vivo. A pasta <code>passos/</code> guarda quatro versões do mesmo arquivo, do servidor vazio até a chamada real, e a aula pode parar em qualquer passo. O exercício compara uma tool <code>fetch</code> genérica, que devolve o JSON inteiro para o modelo processar, com uma tool específica, que devolve campos já convertidos.</li>
+      <li><code>psatin/mcp-diario-violao</code> é um diário de prática de violão com seis tools, algumas com escrita em disco. A escrita traz para a aula três assuntos que o servidor somente leitura não alcança: aprovação de escrita no cliente, idempotência e persistência quando o processo roda em container efêmero. O domínio vem do guitar-study, aplicação estática de estudo de violão com nove módulos, rotina diária e diário de prática.</li>
     </ul>
     <p>Os dois falam MCP pelo transporte stdio e rodam em container. As imagens estão públicas no Docker Hub.</p>
 
@@ -194,6 +222,7 @@
 
     <ul class="links">
       <li><span>Imagens</span> <a href="https://hub.docker.com/r/psatin/mcp-diario-violao">psatin/mcp-diario-violao</a>, <a href="https://hub.docker.com/r/psatin/mcp-pokeapi">psatin/mcp-pokeapi</a></li>
+      <li><span>guitar-study</span> <a href="https://pedrosatin.github.io/guitar-study/">pedrosatin.github.io/guitar-study</a></li>
     </ul>
   </section>
 
@@ -202,7 +231,7 @@
     <h2>Um portal de notícias do IBGE como avaliação de bimestre</h2>
 
     <h3>Problema pedagógico</h3>
-    <p>Avaliar consumo de API pública com um enunciado fechado: filtros por tipo, quantidade e período, sobre dados reais que mudam todo dia.</p>
+    <p>Avaliar consumo de API pública com um enunciado fechado, com filtros por tipo, quantidade e período, sobre dados reais que mudam todo dia.</p>
 
     <h3>O que é</h3>
     <p>O código de exemplo da prova do segundo bimestre de Programação Web do 5º semestre, com o portal no ar. A página consulta notícias e releases no IBGE e filtra por tipo, quantidade e intervalo de datas.</p>
@@ -210,16 +239,6 @@
     <ul class="links">
       <li><span>Página</span> <a href="https://pedrosatin.github.io/prova-ibge-noticias/">pedrosatin.github.io/prova-ibge-noticias</a></li>
       <li><span>Repositório</span> <a href="https://github.com/pedrosatin/prova-ibge-noticias">github.com/pedrosatin/prova-ibge-noticias</a></li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <p class="kicker">Programação Web e React em 2024</p>
-    <h2>Repositórios de exemplo das aulas de 2024</h2>
-    <p>Código de exemplo usado nas aulas de Programação Web e React em 2024, preservado nos repositórios originais arquivados.</p>
-    <ul class="links">
-      <li><span>React</span> <a href="https://github.com/pedrosatin/calc-react">calc-react</a>, <a href="https://github.com/pedrosatin/tasks-react">tasks-react</a>, <a href="https://github.com/pedrosatin/minefield-react">minefield-react</a></li>
-      <li><span>Web</span> <a href="https://github.com/pedrosatin/proffy-web">proffy-web</a>, <a href="https://github.com/pedrosatin/calc-angular">calc-angular</a></li>
     </ul>
   </section>
 
