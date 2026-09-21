@@ -1,37 +1,43 @@
-# Vitrine de material didático
+# Teaching material showcase
 
-Página estática única que consolida os artefatos de aula autorais das disciplinas de Engenharia de
-Software (UniCesumar), para servir de link único em currículo e perfil profissional, no lugar de
-vários repositórios soltos. Só entra artefato usado em aula, com página no ar ou código público, e
-todo link é verificado. A página responde 200, o repositório e a imagem são públicos.
+A single static page that gathers the original class artifacts from Software Engineering
+courses (UniCesumar), to serve as one link on a resume or professional profile instead of
+several loose repositories. Only artifacts actually used in class are listed, each with a live
+page or public code, and every link is checked. The page responds 200, and the repository and
+image are public.
 
-## Conteúdo
+## Contents
 
-`index.html` é a página inteira. HTML e CSS num arquivo só, sem JavaScript, sem CDN, sem framework
-e sem fonte externa. Tema claro e escuro por `prefers-color-scheme`, em coluna única que se ajusta
-até largura de celular.
+`index.html` is the whole page: HTML and CSS in a single file, no JavaScript, no CDN, no
+framework, and no external font. Light and dark themes follow `prefers-color-scheme`, in a
+single column that adapts down to phone width.
 
-Não há build. Abrir o arquivo no navegador já mostra o resultado final.
+There is no build step. Opening the file in a browser already shows the final result.
 
-## Artefatos apresentados
+## Artifacts featured
 
-| Artefato | Página no ar | Código ou imagem pública |
+| Artifact | Live page | Public code or image |
 |---|---|---|
-| Runtime de tool calling no navegador | `pedrosatin.github.io/runtime-tool-calling` | `pedrosatin/runtime-tool-calling` |
-| Laboratório de prompt injection | `pedrosatin.github.io/laboratorio-prompt-injection` | `pedrosatin/laboratorio-prompt-injection` |
-| Extrator de diff de pull request | `pedrosatin.github.io/pr-diff-extractor` | `pedrosatin/pr-diff-extractor` |
-| Servidores MCP da disciplina | `pedrosatin.github.io/guitar-study` (domínio do diário) | `psatin/mcp-pokeapi` e `psatin/mcp-diario-violao` no Docker Hub |
-| Prova de Programação Web em 2024 | `pedrosatin.github.io/prova-ibge-noticias` | `pedrosatin/prova-ibge-noticias` |
+| Browser-based tool calling runtime | `pedrosatin.github.io/runtime-tool-calling` | `pedrosatin/runtime-tool-calling` |
+| Prompt injection lab | `pedrosatin.github.io/laboratorio-prompt-injection` | `pedrosatin/laboratorio-prompt-injection` |
+| Pull request diff extractor | `pedrosatin.github.io/pr-diff-extractor` | `pedrosatin/pr-diff-extractor` |
+| Course MCP servers | `pedrosatin.github.io/guitar-study` (diary's domain) | `psatin/mcp-pokeapi` and `psatin/mcp-diario-violao` on Docker Hub |
+| 2024 Web Programming exam | `pedrosatin.github.io/prova-ibge-noticias` | `pedrosatin/prova-ibge-noticias` |
 
-## Como publicar
+## How it is published
 
-Repositório privado `pedrosatin/vitrine-material-didatico`, com GitHub Pages público a partir da
-branch `main`, pasta `/ (root)`. O endereço é `https://pedrosatin.github.io/vitrine-material-didatico/`.
-Basta commitar e dar push. O deploy é automático.
+Public repository `pedrosatin/vitrine-material-didatico`, with GitHub Pages served from the
+`main` branch, `/ (root)` folder, via the workflow in `.github/workflows/pages.yml`. The address
+is `https://pedrosatin.github.io/vitrine-material-didatico/`. Committing and pushing to `main`
+is enough; deployment is automatic.
 
-## Manutenção
+## Maintenance
 
-Ao publicar um artefato novo, copiar um bloco `<section class="card">` existente e manter a mesma
-estrutura, com problema pedagógico, o que é, stack e links. A página não afirma nada que não esteja
-verificável no repositório correspondente. Sem métrica estimada, sem número de alunos e sem
-resultado não medido.
+When publishing a new artifact, copy an existing `<section class="card">` block and keep the
+same structure: teaching problem, what it is, stack, and links. The page states nothing that
+isn't verifiable in the corresponding repository. No estimated metrics, no student counts, and
+no unmeasured results.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
