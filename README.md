@@ -6,6 +6,8 @@ several loose repositories. Only artifacts actually used in class are listed, ea
 page or public code, and every link is checked. The page responds 200, and the repository and
 image are public.
 
+Criado por [@pedrosatin](https://github.com/pedrosatin)
+
 ## Contents
 
 `index.html` is the whole page: HTML and CSS in a single file, no JavaScript, no CDN, no
@@ -37,6 +39,11 @@ When publishing a new artifact, copy an existing `<section class="card">` block 
 same structure: teaching problem, what it is, stack, and links. The page states nothing that
 isn't verifiable in the corresponding repository. No estimated metrics, no student counts, and
 no unmeasured results.
+
+## Contributing
+
+Suggestions and corrections are welcome via
+[issues](https://github.com/pedrosatin/vitrine-material-didatico/issues).
 
 ## License
 
