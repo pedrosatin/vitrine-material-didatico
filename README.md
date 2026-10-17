@@ -11,7 +11,7 @@ Criado por [@pedrosatin](https://github.com/pedrosatin)
 ## Contents
 
 `index.html` is the whole page: HTML and CSS in a single file, no JavaScript, no CDN, no
-framework, and no external font. Light and dark themes follow `prefers-color-scheme`, in a
+framework, and no external font. `og.png` is the 1200x630 share image used by the Open Graph tags. Light and dark themes follow `prefers-color-scheme`, in a
 single column that adapts down to phone width.
 
 There is no build step. Opening the file in a browser already shows the final result.
@@ -20,6 +20,8 @@ There is no build step. Opening the file in a browser already shows the final re
 
 | Artifact | Live page | Public code or image |
 |---|---|---|
+| Software process with agents (Skills, subagents, MCP, CLI) | none, code only | `pedrosatin/processo-software-agentes` |
+| Agent process lab in Dify | `pedrosatin.github.io/laboratorio-processo-agentes` | `pedrosatin/laboratorio-processo-agentes` |
 | Browser-based tool calling runtime | `pedrosatin.github.io/runtime-tool-calling` | `pedrosatin/runtime-tool-calling` |
 | Prompt injection lab | `pedrosatin.github.io/laboratorio-prompt-injection` | `pedrosatin/laboratorio-prompt-injection` |
 | Pull request diff extractor | `pedrosatin.github.io/pr-diff-extractor` | `pedrosatin/pr-diff-extractor` |
