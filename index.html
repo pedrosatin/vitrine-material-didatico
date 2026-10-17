@@ -4,7 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Material didático de Pedro Satin</title>
-<meta name="description" content="Artefatos de aula autorais de Pedro Satin (UniCesumar): runtime de tool calling, laboratório de prompt injection, extrator de diff de pull request, servidores MCP e a prova de Programação Web de 2024.">
+<meta name="description" content="Artefatos de aula autorais de Pedro Satin (UniCesumar): processo de software com agentes, laboratório de agentes no Dify, runtime de tool calling, laboratório de prompt injection, extrator de diff de pull request, servidores MCP e a prova de Programação Web de 2024.">
+<link rel="canonical" href="https://pedrosatin.github.io/vitrine-material-didatico/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Material didático de Pedro Satin">
+<meta property="og:description" content="Laboratórios e materiais executáveis de Tecnologias Emergentes em Engenharia de Software: agentes, MCP, tool calling e prompt injection.">
+<meta property="og:url" content="https://pedrosatin.github.io/vitrine-material-didatico/">
+<meta property="og:image" content="https://pedrosatin.github.io/vitrine-material-didatico/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Material didático de Pedro Satin, Tecnologias Emergentes, UniCesumar">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pedrosatin.github.io/vitrine-material-didatico/og.png">
 <style>
   :root {
     --bg: #fbfbfa;
@@ -103,6 +115,70 @@
 </header>
 
 <main class="wrap">
+
+  <section class="card">
+    <p class="kicker">Processo de software com agentes</p>
+    <h2>O mesmo fluxo spec, coder e tester montado em quatro ferramentas</h2>
+
+    <h3>Problema pedagógico</h3>
+    <p>Skills, subagents, MCP e CLI costumam aparecer como ferramentas soltas, e o aluno não enxerga o que muda de uma para outra. Aqui a tarefa é sempre a mesma, então a comparação fica no processo e não no exemplo.</p>
+
+    <h3>O que é</h3>
+    <p>O material da aula sobre processo de software com agentes. Os papéis spec, coder e tester implementam a mesma função <code>filtrarTarefas</code> de uma API de tarefas, em cada forma de montar o fluxo.</p>
+    <ul>
+      <li>Uma Skill por papel em Antigravity, Codex e Claude Code.</li>
+      <li>Um subagent por papel, coordenado por <code>AGENTS.md</code> ou <code>CLAUDE.md</code>.</li>
+      <li>Um servidor MCP que conduz as etapas e um CLI em TypeScript que chama a API do modelo para cada papel.</li>
+      <li>Um exemplo que combina subagents, Skills e o servidor MCP.</li>
+      <li>Dois comandos conferem os testes de referência e a ordem das etapas do servidor MCP sem chamar nenhum modelo.</li>
+      <li>Tutorial passo a passo com capturas de tela e relatos de execuções reais, com resultados e limitações.</li>
+    </ul>
+
+    <h3>Stack</h3>
+    <ul class="stack">
+      <li>TypeScript em Node.js</li>
+      <li>Agent Skills</li>
+      <li>subagents</li>
+      <li>MCP</li>
+      <li>API do Google AI Studio</li>
+      <li>Docker</li>
+    </ul>
+
+    <ul class="links">
+      <li><span>Repositório</span> <a href="https://github.com/pedrosatin/processo-software-agentes">github.com/pedrosatin/processo-software-agentes</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <p class="kicker">Laboratório de processo com agentes no Dify</p>
+    <h2>Mudar as instruções dos agentes e ver o que muda no código e nos testes</h2>
+
+    <h3>Problema pedagógico</h3>
+    <p>Depois de ver o fluxo com agentes, o aluno precisa alterar esse fluxo e medir o efeito. Sem um verificador, a conversa para em "a resposta do agente parece boa". Aqui cada alteração é comparada com uma execução de base, com testes que o agente não vê.</p>
+
+    <h3>O que é</h3>
+    <p>A página da atividade A8, com um workflow do Dify em que o spec escreve a especificação e o coder e o tester trabalham a partir dela. O aluno importa o fluxo, faz uma execução de base, ajusta as instruções e os materiais de cada agente para seguir as regras do seu cenário e executa de novo.</p>
+    <ul>
+      <li>Quatro cenários de equipe, sorteados pelo RA do aluno, como correção urgente com limite de linhas alteradas e rastreabilidade entre critérios e testes.</li>
+      <li>O tester recebe só a especificação, sem acesso ao código do coder.</li>
+      <li>O verificador roda o código do coder em um Web Worker do navegador, executa os cinco testes do tester e uma suíte de referência de sete testes que os agentes não veem, e aplica as regras do cenário.</li>
+      <li>A página aponta falso negativo quando os testes do tester deixam passar um problema que a suíte de referência encontra.</li>
+      <li>Roda no plano gratuito do Dify, sem chave de API. Se o Dify falhar, a página traz uma reserva com chat.</li>
+    </ul>
+
+    <h3>Stack</h3>
+    <ul class="stack">
+      <li>Dify (workflow em DSL YAML)</li>
+      <li>HTML, CSS e JavaScript sem framework</li>
+      <li>Web Workers</li>
+      <li>GitHub Pages</li>
+    </ul>
+
+    <ul class="links">
+      <li><span>Página</span> <a href="https://pedrosatin.github.io/laboratorio-processo-agentes/">pedrosatin.github.io/laboratorio-processo-agentes</a></li>
+      <li><span>Repositório</span> <a href="https://github.com/pedrosatin/laboratorio-processo-agentes">github.com/pedrosatin/laboratorio-processo-agentes</a></li>
+    </ul>
+  </section>
 
   <section class="card">
     <p class="kicker">Runtime de tool calling no navegador</p>
